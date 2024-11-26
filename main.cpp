@@ -1,3 +1,5 @@
+#include "lib/api.h"
+#include "lib/algorithms.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -8,16 +10,26 @@ string default_option(vector<string> args);
 string menu(vector<string> args);
 
 int stop = 0;
+double f(double x) {
+    return x*x-1;
+}
 
 int main() {
-    map<string, function<string(vector<string>)>> options;
-    string s, current_option, last_option;
-    s = "Hello!\n";
-    current_option = "menu";
-    cout << s;
-    while (!stop) {
-        last_option = current_option;
-        cin >> current_option;
+    int option;
+    cout <<
+        "Menu:\n"
+        "1. Intro\n"
+        "2. Calculate tables\n"
+        "3. Make graph\n"
+        "4. Solve non-linear equation\n"
+        "5. Calculate defined integral\n";
+    cin >> option;
+    switch (option) {
+        case 4:
+            NonlinearAPI().invoke(f);
+            break;
+        case 5:
+            IntegralAPI().invoke(f);
     }
 }
 
