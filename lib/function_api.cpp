@@ -1,6 +1,5 @@
 #include "/usr/x86_64-w64-mingw32/sys-root/mingw/include/windows.h"
-// #include <conio.h>
-// #include "/usr/x86_64-w64-mingw32/sys-root/mingw/include/conio.h"
+// #include <windows.h>
 #include <math.h>
 #include <iostream>
 #include <functional>
@@ -63,22 +62,22 @@ void FunctionAPI::table(function<float(float)> f) {
 }
 
 void FunctionAPI::plot(function<float(float)> f) {
-    float x, y; 
-    int n;
+    float x, y, step; 
     vector<vector<float>> table;
     HPEN pen;
     HWND hwn;
     HDC hdc;
     HBRUSH brush;
+    RECT rect;
 
-    n = 200;
+    step = 0.01;
 
     cout << "start\n";
     cin >> x;
     cout << "end\n";
     cin >> y;
 
-    table = FunctionAPI::get_table(f, x, y, n);
+    table = FunctionAPI::get_table(f, x, y, (int)(y-x)/step);
 
     hwn = GetConsoleWindow();
     hdc = GetDC(hwn); 

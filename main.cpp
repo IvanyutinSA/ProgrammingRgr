@@ -14,6 +14,7 @@ double f(double x) {
     return x*x-1;
 }
 
+// int wmain() {
 int main() {
     int option;
     setlocale(LC_ALL, "RU");
