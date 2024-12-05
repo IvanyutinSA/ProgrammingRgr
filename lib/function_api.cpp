@@ -63,16 +63,6 @@ void FunctionAPI::table(function<float(float)> f) {
 }
 
 void FunctionAPI::plot(function<float(float)> f) {
-    float x, y, step; 
-    vector<vector<float>> table;
-
-    // cout << "start\n";
-    // cin >> x;
-    // cout << "end\n";
-    // cin >> y;
-
-    table = FunctionAPI::get_table(f, x, y, (int)(y-x)/step);
-
     HWND hwn = GetConsoleWindow();
     HDC hdc = GetDC(hwn);
     RECT rect;
@@ -91,10 +81,10 @@ void FunctionAPI::plot(function<float(float)> f) {
     bool first = true;
     float h;
     h = 0.001;
-    float a = -4;
+    float a = 0;
     float b = 4;
 
-    for (x = a; x < b; x += h) {
+    for (float x = a; x < b; x += h) {
         if (first) {
             SelectObject(hdc, pen);
             MoveToEx(hdc, c+k*x, d-k*f(x), NULL);

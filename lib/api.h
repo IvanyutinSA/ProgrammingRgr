@@ -20,5 +20,13 @@ class FunctionAPI {
         void table(function<float(float)> f);
         void plot(function<float(float)> f);
 };
+class CredentialsAPI {
+    public:
+        void invoke();
+};
+class AnimationAPI {
+    public:
+        void invoke();
+};
 
 # endif
