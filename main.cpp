@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <functional>
+// #include <windows.h>
 using namespace std;
 
 string default_option(vector<string> args);
@@ -16,7 +17,9 @@ double f(double x) {
 
 int main() {
     int option;
+    // setlocale(LC_ALL, "RU");
     cout <<
+        "ываы\n"
         "Menu:\n"
         "1. Intro\n"
         "2. Calculate tables\n"
