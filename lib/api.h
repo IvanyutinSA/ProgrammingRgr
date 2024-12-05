@@ -2,6 +2,7 @@
 # define API_H
 
 #include <functional>
+#include <string>
 using namespace std;
 
 class NonlinearAPI {
@@ -11,6 +12,13 @@ class NonlinearAPI {
 class IntegralAPI {
     public:
         void invoke(function<float(float)> f);
+};
+class FunctionAPI {
+    public:
+        void invoke(function<float(float)> f, string action_name);
+    private:
+        void table(function<float(float)> f);
+        void plot(function<float(float)> f);
 };
 
 # endif

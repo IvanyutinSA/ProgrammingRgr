@@ -18,19 +18,26 @@ int main() {
     int option;
     setlocale(LC_ALL, "RU");
     cout <<
-        "Меню:\n"
-        "1. Заставка\n"
-        "2. Рассчёт таблиц\n"
-        "3. Построение графика\n"
-        "4. Решение нелинейного уравнения\n"
-        "5. Взятие определённого интеграла\n";
+        "Menu:\n"
+        "1. Intro\n"
+        "2. Table\n"
+        "3. Plot\n"
+        "4. Equation\n"
+        "5. Definite integral\n";
     cin >> option;
     switch (option) {
+        case 2:
+            FunctionAPI().invoke(f, "table");
+            break;
+        case 3:
+            FunctionAPI().invoke(f, "plot");
+            break;
         case 4:
             NonlinearAPI().invoke(f);
             break;
         case 5:
             IntegralAPI().invoke(f);
+            break;
     }
 }
 

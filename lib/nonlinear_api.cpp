@@ -10,15 +10,15 @@ class NonlinearAPI {
 
 void NonlinearAPI::invoke(function<float(float)> f) {
     cout << 
-        "Выберите метод:\n"
-        "1. Деления пополам\n"
-        "2. Хорд\n";
+        "Method\n"
+        "1. dichotomy\n"
+        "2. secant\n";
     float a, b, root;
     int method;
     cin >> method;
-    cout << "Введите начало отрезка\n";
+    cout << "start\n";
     cin >> a;
-    cout << "Введите конец отрезка\n";
+    cout << "end\n";
     cin >> b;
     switch(method) {
         case 1: 
@@ -28,5 +28,5 @@ void NonlinearAPI::invoke(function<float(float)> f) {
             root = secant_method(f, a, b);
             break;
     }
-    cout << "Найденный корень: " << root <<"\n";
+    cout << "Result: " << root <<"\n";
 }

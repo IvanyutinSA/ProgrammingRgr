@@ -9,11 +9,11 @@ class IntegralAPI {
 
 void IntegralAPI::invoke(function<float(float)> f) {
     float a, b, integral;
-    cout << "¬ведите начало отрезка\n";
+    cout << "start\n";
     cin >> a;
-    cout << "¬ведите конец отрезка\n";
+    cout << "end\n";
     cin >> b;
-    cout << "«начение определЄнного интеграла: " 
+    cout << "Result: " 
          << definite_integral(f, a, b)
          << '\n';
 }
