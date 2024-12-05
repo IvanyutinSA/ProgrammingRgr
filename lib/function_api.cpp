@@ -1,4 +1,5 @@
 #include "/usr/x86_64-w64-mingw32/sys-root/mingw/include/windows.h"
+#include "/usr/x86_64-w64-mingw32/sys-root/mingw/include/conio.h"
 // #include <windows.h>
 #include <math.h>
 #include <iostream>
@@ -64,35 +65,45 @@ void FunctionAPI::table(function<float(float)> f) {
 void FunctionAPI::plot(function<float(float)> f) {
     float x, y, step; 
     vector<vector<float>> table;
-    HPEN pen;
-    HWND hwn;
-    HDC hdc;
-    HBRUSH brush;
-    RECT rect;
 
-    step = 0.01;
-
-    cout << "start\n";
-    cin >> x;
-    cout << "end\n";
-    cin >> y;
+    // cout << "start\n";
+    // cin >> x;
+    // cout << "end\n";
+    // cin >> y;
 
     table = FunctionAPI::get_table(f, x, y, (int)(y-x)/step);
 
-    hwn = GetConsoleWindow();
-    hdc = GetDC(hwn); 
+    HWND hwn = GetConsoleWindow();
+    HDC hdc = GetDC(hwn);
+    RECT rect;
+    GetClientRect(hwn, &rect);
+    const int c = rect.right/2,
+              d = rect.bottom/2,
+              k = 100;
 
-    pen = CreatePen(PS_SOLID, 3, RGB(255, 255, 255));
-    brush = CreateSolidBrush(RGB(0, 0, 0));
-
+    HPEN pen = CreatePen(PS_DASH, 2, RGB(140, 90, 10));
     SelectObject(hdc, pen);
-    MoveToEx(hdc, table[0][0], table[0][0], NULL);
+    MoveToEx(hdc, 0, d, NULL);
+    LineTo(hdc, c*k, d);
+    MoveToEx(hdc, c, 0, NULL);
+    LineTo(hdc, c, k*d);
 
-    for (int i = 1; i < table.size(); i++) {
-        LineTo(hdc, table[i][0], table[i][1]);
-        MoveToEx(hdc, table[i][0], table[i][1], NULL);
+    bool first = true;
+    float h;
+    h = 0.001;
+    float a = -4;
+    float b = 4;
+
+    for (x = a; x < b; x += h) {
+        if (first) {
+            SelectObject(hdc, pen);
+            MoveToEx(hdc, c+k*x, d-k*f(x), NULL);
+            first = false;
+        } else {
+            LineTo(hdc, c+k*x, d-k*f(x));
+        }
     }
 
-    cin >> y;
+    getch();
     ReleaseDC(hwn, hdc);
 }
