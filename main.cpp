@@ -4,7 +4,6 @@
 #include <map>
 #include <string>
 #include <functional>
-// #include <windows.h>
 using namespace std;
 
 string default_option(vector<string> args);
@@ -17,15 +16,14 @@ double f(double x) {
 
 int main() {
     int option;
-    // setlocale(LC_ALL, "RU");
+    setlocale(LC_ALL, "RU");
     cout <<
-        "ываы\n"
-        "Menu:\n"
-        "1. Intro\n"
-        "2. Calculate tables\n"
-        "3. Make graph\n"
-        "4. Solve non-linear equation\n"
-        "5. Calculate defined integral\n";
+        "Меню:\n"
+        "1. Заставка\n"
+        "2. Рассчёт таблиц\n"
+        "3. Построение графика\n"
+        "4. Решение нелинейного уравнения\n"
+        "5. Взятие определённого интеграла\n";
     cin >> option;
     switch (option) {
         case 4:

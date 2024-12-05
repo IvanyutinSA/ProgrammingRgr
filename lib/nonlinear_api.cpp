@@ -10,15 +10,15 @@ class NonlinearAPI {
 
 void NonlinearAPI::invoke(function<float(float)> f) {
     cout << 
-        "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¼ÐµÑ‚Ð¾Ð´:\n"
-        "1. Ð”ÐµÐ»ÐµÐ½Ð¸Ñ Ð¿Ð¾Ð¿Ð¾Ð»Ð°Ð¼\n"
-        "2. Ð¥Ð¾Ñ€Ð´\n";
+        "Âûáåðèòå ìåòîä:\n"
+        "1. Äåëåíèÿ ïîïîëàì\n"
+        "2. Õîðä\n";
     float a, b, root;
     int method;
     cin >> method;
-    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¾Ñ‚Ñ€ÐµÐ·ÐºÐ°\n";
+    cout << "Ââåäèòå íà÷àëî îòðåçêà\n";
     cin >> a;
-    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð½ÐµÑ† Ð¾Ñ‚Ñ€ÐµÐ·ÐºÐ°\n";
+    cout << "Ââåäèòå êîíåö îòðåçêà\n";
     cin >> b;
     switch(method) {
         case 1: 
@@ -28,5 +28,5 @@ void NonlinearAPI::invoke(function<float(float)> f) {
             root = secant_method(f, a, b);
             break;
     }
-    cout << "ÐÐ°Ð¹Ð´ÐµÐ½Ð½Ñ‹Ð¹ ÐºÐ¾Ñ€ÐµÐ½ÑŒ: " << root <<"\n";
+    cout << "Íàéäåííûé êîðåíü: " << root <<"\n";
 }
