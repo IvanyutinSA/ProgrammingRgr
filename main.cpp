@@ -15,7 +15,8 @@ void table();
 void plot();
 void nonlinear_equation();
 void defined_intergral();
-void make_plot(function<float(float)> f);
+void make_plot(function<float(float)> f, int *color_rgb);
+void make_axes();
 
 int main() {
     int stop = 0;
@@ -129,8 +130,8 @@ void table() {
     float dram_vals[4];
 
     cout << "x" << "\t"
-         << "f1(x)" << "\t"
-         << "f2(x)" << "\n";
+         << "f(x)" << "\t"
+         << "g(x)" << "\n";
 
     dram_vals[0] = +1000;
     dram_vals[1] = -1000;
@@ -170,11 +171,14 @@ void table() {
 }
 
 void plot() {
-    make_plot(table_f1);
-    make_plot(table_f2);
+    cout << "\033[31m*\033[0mf(x) = sqrt(exp(x)-1)\n";
+    cout << "\033[34m*\033[0mg(x) = x*log^2(x)\n";
+    make_axes();
+    make_plot(table_f1, new int[] {255, 0, 0});
+    make_plot(table_f2, new int[] {0, 0, 255});
 }
 
-void make_plot(function<float(float)> f) {
+void make_axes() {
     HWND hwn = GetConsoleWindow();
     HDC hdc = GetDC(hwn);
     RECT rect;
@@ -189,6 +193,20 @@ void make_plot(function<float(float)> f) {
     LineTo(hdc, c*k, d);
     MoveToEx(hdc, c, 0, NULL);
     LineTo(hdc, c, k*d);
+    ReleaseDC(hwn, hdc);
+}
+
+void make_plot(function<float(float)> f, int *color_rgb) {
+    HWND hwn = GetConsoleWindow();
+    HDC hdc = GetDC(hwn);
+    RECT rect;
+    GetClientRect(hwn, &rect);
+    const int c = rect.right/2,
+              d = rect.bottom/2,
+              k = 100;
+
+    HPEN pen = CreatePen(PS_DASH, 2, RGB(color_rgb[0], color_rgb[1], color_rgb[2]));
+    SelectObject(hdc, pen);
 
     bool first = true;
     float h;
