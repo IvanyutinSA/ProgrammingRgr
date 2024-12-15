@@ -1,6 +1,5 @@
 #include <functional>
 #include <algorithm>
-#include <vector>
 #include <math.h>
 #include "/usr/x86_64-w64-mingw32/sys-root/mingw/include/windows.h"
 #include "/usr/x86_64-w64-mingw32/sys-root/mingw/include/conio.h"
@@ -17,6 +16,9 @@ void nonlinear_equation();
 void defined_intergral();
 void make_plot(function<float(float)> f, int *color_rgb);
 void make_axes();
+void trapezoid_defined_integral();
+float rect_definite_integral(function<float(float)> f, float a, float b, float dx=0.01);
+float trap_definite_integral(function<float(float)> f, float a, float b, float dx=0.01);
 
 int main() {
     int stop = 0;
@@ -263,12 +265,21 @@ float secant_method(function<float(float)> f, float a, float b, float e=0.0001) 
 }
 
 
-float definite_integral(function<float(float)> f, float a, float b, float dx=0.01) {
+float rect_definite_integral(function<float(float)> f, float a, float b, float dx) {
     float step, x, accumulated_sum;
     step = dx;
-    x = a+step;
     for (x = a+step/2; x <= b; x += step) {
         accumulated_sum += f(x)*step;
+    }
+    return accumulated_sum;
+}
+
+float trap_definite_integral(function<float(float)> f, float a, float b, float dx) {
+    float step, u, v, accumulated_sum;
+    step = dx;
+    v = a;
+    for (u = a+step; u <= b; u += step) {
+        accumulated_sum += (f(v)+f(u))*step/2;
     }
     return accumulated_sum;
 }
@@ -302,6 +313,11 @@ void defined_intergral() {
     b = 8;
     cout << "Function: 2xlg(x-3)-3\n";
     cout << "Integration interval: [4, 8]\n";
-    s = definite_integral(integral_f, a, b);
+    s = rect_definite_integral(integral_f, a, b);
+    cout << "Method: rectangle\n";
+    cout << "Definite integral: "<< s << "\n";
+    s = rect_definite_integral(integral_f, a, b);
+    cout << "Method: trapezoid\n";
     cout << "Definite integral: "<< s << "\n";
 }
+
